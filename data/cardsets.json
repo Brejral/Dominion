@@ -1,0 +1,163 @@
+[{
+	"name": "Dominion Only",
+	"paths": ["base"],
+	"sets": [{
+		"name": "First Game",
+		"cards": ["Cellar","Market","Militia","Mine","Moat","Remodel","Smithy","Village","Woodcutter","Workshop"] 
+	}, {
+		"name": "Big Money",
+		"cards": ["Adventurer","Bureaucrat","Chancellor","Chapel","Feast","Laboratory","Market","Mine","Moneylender","ThroneRoom"]
+	}, {
+		"name": "Interaction",
+		"cards": ["Bureaucrat","Chancellor","CouncilRoom","Festival","Library","Militia","Moat","Spy","Thief","Village"]
+	}, {
+		"name": "Size Distortion",
+		"cards": ["Cellar","Chapel","Feast","Gardens","Laboratory","Thief","Village","Witch","Woodcutter","Workshop"],
+		"additionalCards": ["Curse"]
+	}, {
+		"name": "Village Square",
+		"cards": ["Bureaucrat","Cellar","Festival","Library","Market","Remodel","Smithy","ThroneRoom","Village","Woodcutter"]
+	}]
+},{
+	"name": "Dominion & Intrigue",
+	"paths": ["base", "intrigue"],
+	"sets": [{
+		"name": "Deconstruction",
+		"cards": ["Bridge","MiningVillage","Remodel","Saboteur","SecretChamber","Spy","Swindler","Thief","ThroneRoom","Torturer"],
+		"additionalCards": ["Curse"]
+	},{
+		"name": "Hand Madness",
+		"cards": ["Bureaucrat","Chancellor","CouncilRoom","Courtyard","Mine","Militia","Minion","Nobles","Steward","Torturer"],
+		"additionalCards": ["Curse"]
+	},{
+	},{
+		"name": "Underlings",
+		"cards": ["Baron","Cellar","Festival","Library","Masquerade","Minion","Nobles","Pawn","Steward","Witch"],
+		"additionalCards": ["Curse"]
+	}]
+},{
+	"name": "Dominion & Seaside",
+	"paths": ["base", "seaside"],
+	"sets": [{
+		"name": "Reach for Tomorrow",
+		"cards": ["Adventurer","Cellar","CouncilRoom","Cutpurse","GhostShip","Lookout","SeaHag","Spy","TreasureMap","Village"],
+		"additionalCards": ["Curse"]
+	},{
+		"name": "Repetition",
+		"cards": ["Caravan","Chancellor","Explorer","Festival","Militia","Outpost","PearlDiver","PirateShip","Treasury","Workshop"],
+		"additionalCards": ["Curse"]
+	},{
+		"name": "Give and Take",
+		"cards": ["Ambassador","FishingVillage","Haven","Island","Library","Market","Moneylender","Salvager","Smugglers","Witch"],
+		"additionalCards": ["Curse"]
+	}]
+},{
+	"name": "Dominion & Alchemy",
+	"paths": ["base", "alchemy"],
+	"sets": [{
+		"name": "Forbidden Arts",
+		"cards": ["Apprentice","Familiar","Possession","University","Cellar","CouncilRoom","Gardens","Laboratory","Thief","ThroneRoom"],
+		"additionalCards": ["Curse","Potion"]
+	},{
+		"name": "Potion Mixers",
+		"cards": ["Alchemist","Apothecary","Golem","Herbalist","Transmute","Cellar","Chancellor","Festival","Militia","Smithy"],
+		"additionalCards": ["Potion"]
+	},{
+		"name": "Forbidden Arts",
+		"cards": ["Alchemist","Golem","PhilosophersStone","University","Bureaucrat","Market","Moat","Remodel","Witch","Woodcutter"],
+		"additionalCards": ["Curse","Potion"]
+	}]
+},{
+	"name": "Dominion & Prosperity",
+	"paths": ["base", "prosperity"],
+	"sets": [{
+		"name": "Biggest Money",
+		"cards": ["Bank","GrandMarket","Mint","RoyalSeal","Venture","Adventurer","Laboratory","Mine","Moneylender","Spy"],
+		"additionalCards": ["Platinum","Colony"]
+	},{
+		"name": "The King's Army",
+		"cards": ["Expand","Goons","KingsCourt","Rabble","Vault","Bureaucrat","CouncilRoom","Moat","Spy","Village"],
+		"additionalCards": ["Platinum","Colony"]
+	},{
+		"name": "The Good Life",
+		"cards": ["Contraband","CountingHouse","Hoard","Monument","Mountebank","Bureaucrat","Cellar","Chancellor","Gardens","Village"],
+		"additionalCards": ["Curse","Platinum","Colony"]
+	}]
+},{
+	"name": "Intrigue Only",
+	"paths": ["intrigue"],
+	"sets": [{
+		"name": "Victory Dance",
+		"cards": ["Bridge","Duke","GreatHall","Harem","Ironworks","Masquerade","Nobles","Pawn","Scout","Upgrade"]
+	},{
+		"name": "Secret Schemes",
+		"cards": ["Conspirator","Harem","Ironworks","Pawn","Saboteur","ShantyTown","Steward","Swindler","TradingPost","Tribute"]
+	},{
+		"name": "Best Wishes",
+		"cards": ["Coppersmith","Courtyard","Masquerade","Scout","ShantyTown","Steward","Torturer","TradingPost","Upgrade","WishingWell"],
+		"additionalCards":["Curse"]
+	}]
+},{
+	"name": "Intrigue & Alchemy",
+	"paths": ["intrigue", "alchemy"],
+	"sets": [{
+		"name": "Servants",
+		"cards": ["Golem","Possession","ScryingPool","Transmute","Vineyard","Conspirator","GreatHall","Minion","Pawn","Steward"],
+		"additionalCards": ["Potion"]
+	},{
+		"name": "Secret Research",
+		"cards": ["Familiar","Herbalist","PhilosophersStone","University","Bridge","Masquerade","Minion","Nobles","ShantyTown","Torturer"],
+		"additionalCards": ["Curse","Potion"]
+	},{
+		"name": "Pools, Tools, and Fools",
+		"cards": ["Apothecary","Apprentice","Golem","ScryingPool","Baron","Coppersmith","Ironworks","Nobles","TradingPost","WishingWell"],
+		"additionalCards": ["Potion"]
+	}]
+},{
+	"name": "Intrigue & Prosperity",
+	"paths": ["intrigue", "prosperity"],
+	"sets": [{
+		"name": "Paths to Victory",
+		"cards": ["Bishop","CountingHouse","Goons","Monument","Peddler","Baron","Harem","Pawn","ShantyTown","Upgrade"],
+		"additionalCards": ["Platinum","Colony"]
+	},{
+		"name": "All Along the Watchtower",
+		"cards": ["Hoard","Talisman","TradeRoute","Vault","Watchtower","Bridge","GreatHall","MiningVillage","Pawn","Torturer"],
+		"additionalCards": ["Curse","Platinum","Colony"]
+	},{
+		"name": "Lucky Seven",
+		"cards": ["Bank","Expand","Forge","KingsCourt","Vault","Bridge","Coppersmith","Swindler","Tribute","WishingWell"],
+		"additionalCards": ["Platinum","Colony"]
+	}]
+},{
+	"name": "Seaside Only",
+	"paths": ["seaside"],
+	"sets": [{
+		"name": "High Seas",
+		"cards": ["Bazaar","Caravan","Embargo","Explorer","Haven","Island","Lookout","PirateShip","Smugglers","Wharf"],
+		"additionalCards": ["Curse"]
+	},{
+		"name": "Buried Treasure",
+		"cards": ["Ambassador","Cutpurse","FishingVillage","Lighthouse","Outpost","PearlDiver","Tactician","TreasureMap","Warehouse","Wharf"]
+	},{
+		"name": "Shipwrecks",
+		"cards": ["GhostShip","MerchantShip","NativeVillage","Navigator","PearlDiver","Salvager","SeaHag","Smugglers","Treasury","Warehouse"],
+		"additionalCards": ["Curse"]
+	}]
+},{
+	"name": "Prosperity Only",
+	"paths": ["prosperity"],
+	"sets": [{
+		"name": "Beginners",
+		"cards": ["Bank","CountingHouse","Expand","Goons","Monument","Rabble","RoyalSeal","Venture","Watchtower","WorkersVillage"],
+		"additionalCards": ["Platinum","Colony"]
+	},{
+		"name": "Friendly Interactive",
+		"cards": ["Bishop","City","Contraband","Forge","Hoard","Peddler","RoyalSeal","TradeRoute","Vault","WorkersVillage"],
+		"additionalCards": ["Platinum","Colony"]
+	},{
+		"name": "Big Actions",
+		"cards": ["City","Expand","GrandMarket","KingsCourt","Loan","Mint","Quarry","Rabble","Talisman","Vault"],
+		"additionalCards": ["Platinum","Colony"]
+	}]
+}]

@@ -1,0 +1,81 @@
+--
+-- For more information on build.settings see the Corona SDK Build Guide at:
+-- http://docs.coronalabs.com/guide/distribution/buildSettings/index.html
+--
+
+settings =
+{
+	
+	orientation =
+	{
+		-- Supported values for orientation:
+		-- portrait, portraitUpsideDown, landscapeLeft, landscapeRight
+
+		default = "landscape",
+		supported = { "landscape", }
+	},
+	
+	excludeFiles =
+	{
+		-- Include only the necessary icon files on each platform
+		iphone = { "images/Icon/Icon-*dpi.png", },
+		android = { "images/Icon/Icon.png", "images/Icon/Icon-Small-*.png", "images/Icon/Icon*@2x.png", },
+	},
+
+	--
+	-- iOS Section
+	--
+	iphone =
+	{
+		plist =
+		{
+			UIStatusBarHidden = false,
+			UIPrerenderedIcon = true, -- set to false for "shine" overlay
+			--UIApplicationExitsOnSuspend = true, -- uncomment to quit app on suspend
+
+			CFBundleIconFiles =
+			{
+				"images/Icon/Icon.png",
+				"images/Icon/Icon@2x.png",
+				"images/Icon/Icon-60.png",
+				"images/Icon/Icon-60@2x.png",
+				"images/Icon/Icon-60@3x.png",
+				"images/Icon/Icon-72.png",
+				"images/Icon/Icon-72@2x.png",
+				"images/Icon/Icon-76.png",
+				"images/Icon/Icon-76@2x.png",
+				"images/Icon/Icon-Small.png",
+				"images/Icon/Icon-Small@2x.png",
+				"images/Icon/Icon-Small@3x.png",
+				"images/Icon/Icon-Small-40.png",
+				"images/Icon/Icon-Small-40@2x.png",
+				"images/Icon/Icon-Small-50.png",
+				"images/Icon/Icon-Small-50@2x.png",
+			},
+
+			--[[
+			-- iOS app URL schemes:
+			CFBundleURLTypes =
+			{
+				{
+					CFBundleURLSchemes =
+					{
+						"fbXXXXXXXXX",  -- replace XXXXXXXXX with your Facebook appId
+					}
+				}
+			}
+			--]]
+		}
+	},
+	
+	--
+	-- Android Section
+	--
+	android =
+	{
+		usesPermissions =
+		{
+			"android.permission.INTERNET",
+		},
+	},
+}
