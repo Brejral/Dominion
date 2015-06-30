@@ -93,6 +93,10 @@ function CardSupply:getCardsOfCost(cost)
          table.insert(cards, cardInst)
       end
    end
+   local function sorter(a, b)
+      return not a:costsPotion() or b:costsPotion()
+   end
+   table.sort(cards, sorter)
    return cards
 end
 

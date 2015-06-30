@@ -14,10 +14,13 @@ function Game:__init(params)
    self.cardSupply = CardSupply(params)
    self:setupPlayers(params)
    self.trash = {}
+   self.extraTurns = {}
+   self.endOfTurnCards = {}
+   self.nextStandardTurnPlayer = nil
+   self.consecutiveTurns = 0
    self.costDiscount = 0
    self.copperBonus = 0
-   self.outpostPlayed = false
-   self.secondOutpostTurn = false
+   self.isExtraTurn = false
 
    Runtime:addEventListener("actionEnd", self.actionEndListener)
 end
@@ -26,8 +29,9 @@ end
 function Game:setupPlayers(params)
    self.players = {}
    local num = params.numPlayers
+   local playerNames = loadData("playernames.json")
    for i=1,num do
-      self.players[i] = Player({name= "Player " .. i})
+      self.players[i] = Player({name= playerNames[i]})
    end
    shuffle(self.players)
 
@@ -103,6 +107,9 @@ function Game:cleanupPhase()
       if card.onDiscardFromPlay then
          table.insert(player.discardFromPlayCards, card)
       end
+      if card.onEndOfTurn then
+         table.insert(player.endOfTurnCards, card)
+      end
    end
    player:checkForDiscardFromPlayCards()
 end
@@ -114,15 +121,30 @@ function Game:nextTurn()
    self.copperBonus = 0
    player:endTurn()
    self:checkForEndOfGame()
-   if self.outpostPlayed and not self.secondOutpostTurn then
-      player:startTurn()
-      self.secondOutpostTurn = true
+   if #self.extraTurns > 0 then
+      print("ExtraTurn")
+      self.nextStandardTurnPlayer = nextPlayer
+      self.isExtraTurn = true
+      local extraTurn = table.remove(self.extraTurns)
+      if extraTurn.isPossession then extraTurn.player:setPossessor(extraTurn.possessor) end
+      self.consecutiveTurns = extraTurn.player == player and self.consecutiveTurns + 1 or 1
+      extraTurn.player:startTurn()
    else
-      self.outpostPlayed = false
-      self.secondOutpostTurn = false
+      self.isExtraTurn = false
+      nextPlayer = self.nextStandardTurnPlayer or nextPlayer
+      self.consecutiveTurns = nextPlayer == player and self.consecutiveTurns + 1 or 1
       nextPlayer:startTurn()
    end
    gameScreen:update()
+end
+
+function Game:checkForEndOfTurnCards()
+   local player = game:getCurrentPlayerForTurn()
+   if #player.endOfTurnCards > 0 then
+      table.remove(player.endOfTurnCards):onEndOfTurn(player)
+   else
+      self:nextTurn()
+   end
 end
 
 function Game:nextAttackTurn()
@@ -184,7 +206,6 @@ function Game:getPrevPlayer(player)
 end
 
 function Game.actionEndListener(event)
-print("actionEndListener")
    local player = game:getCurrentPlayerForTurn()
    gameScreen:update()
    if player.actions == 0 or not player:hasTypeInHand(Action) then
@@ -284,4 +305,13 @@ function Game:getStandings()
       end
    end
    return standings
+end
+
+function Game:addExtraTurn(extraTurn)
+   table.insert(self.extraTurns, extraTurn)
+end
+
+function Game:hasExtraPossessedTurnForPlayer(player)
+   local nextExtraTurn = self.extraTurns[#self.extraTurns]
+   return nextExtraTurn.player == player and nextExtraTurn.isPossession
 end

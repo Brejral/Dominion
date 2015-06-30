@@ -171,14 +171,14 @@ function scene:setupTab(name, cards)
 end
 
 function scene:setupCards(group, cards)
-   local x = self.left + self.width / 2 - #cards / 2 * cardScale.width + 0.15 * sWidth
+   local x = self.left + self.width / 2 - ((#cards - 1) % 5 + 1) / 2 * cardScale.width + 0.15 * sWidth
    local y = self.top + 0.07 * sHeight + cardScale.height / 2
    group.cards = {}
    for k,card in pairs(cards) do
       local cardImg = display.newImage(card:getImage())
       cardImg.card = card
-      cardImg.x = x + ((k % 5)  - 0.5) * cardScale.width
-      cardImg.y = y + math.floor(k/5) * cardScale.height
+      cardImg.x = x + (((k - 1) % 5 + 1)  - 0.5) * cardScale.width
+      cardImg.y = y + math.floor((k - 1)/5) * cardScale.height
       cardImg:addEventListener("touch", cardTouchListener)
       combine(cardImg, cardScale)
       table.insert(group.cards, cardImg)

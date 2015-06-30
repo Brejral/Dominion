@@ -17,5 +17,9 @@ end
 
 function Familiar:playAction()
    self.Attack.playAction(self)
-   self:endAction()
+end
+
+function Familiar:performAttack(player)
+   player:gainCardFromSupply("Curse")
+   game:nextAttackTurn()
 end

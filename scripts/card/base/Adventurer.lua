@@ -33,5 +33,16 @@ function Adventurer:playAction()
    for k,card in pairs(revealedCards) do
       player:discardCard(card)
    end
+   local modalParams = {
+      title = player.name,
+      msg = "Revealed cards that were discarded.",
+      cards = revealedCards,
+      afterSelection = self.handleCardSelectionModal,
+      isSelection = false
+   }
+   gameScreen:showCardSelectionModal(modalParams)
+end
+
+function Adventurer:handleCardSelectionModal(params)
    self:endAction()
 end

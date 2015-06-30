@@ -63,7 +63,7 @@
 		"cards": ["Alchemist","Apothecary","Golem","Herbalist","Transmute","Cellar","Chancellor","Festival","Militia","Smithy"],
 		"additionalCards": ["Potion"]
 	},{
-		"name": "Forbidden Arts",
+		"name": "Chemistry Lesson",
 		"cards": ["Alchemist","Golem","PhilosophersStone","University","Bureaucrat","Market","Moat","Remodel","Witch","Woodcutter"],
 		"additionalCards": ["Curse","Potion"]
 	}]

@@ -23,13 +23,14 @@ end
 
 function Haven:handleHandSelection(cards)
    local player = game:getCurrentPlayerForTurn()
-   self.setAsideCard = table.remove(player.hand, indexOf(player.hand, cards[1]))
+   self.setAsideCard = player:removeFromHand(cards[1])
+   player:addCardToSetAsideCards(self.setAsideCard)
    self:endAction()
 end
 
 function Haven:performDuration()
    self.Duration.performDuration(self)
    local player = game:getCurrentPlayerForTurn()
-   player:addCardToHand(self.setAsideCard)
+   player:addCardToHand(player:removeFromSetAsideCards(self.setAsideCard))
    self.setAsideCard = nil
 end

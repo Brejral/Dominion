@@ -135,14 +135,14 @@ function scene:destroy( event )
 end
 
 function scene:setupCards(cards)
-   local x = self.left + self.width / 2 - #cards / 2 * cardScale.width
+   local x = self.left + self.width / 2 - ((#cards - 1) % 10 + 1) / 2 * cardScale.width
    local y = self.msgText.y + self.msgText.height/2 + 0.05 * sHeight + cardScale.height / 2
    self.cards = {}
    for k,card in pairs(cards) do
       local cardImg = display.newImage(card:getImage())
       cardImg.card = card
-      cardImg.x = x + (k - 0.5) * cardScale.width
-      cardImg.y = y
+      cardImg.x = x + (((k - 1) % 10 + 1)  - 0.5) * cardScale.width
+      cardImg.y = y + math.floor((k - 1)/10) * cardScale.height
       cardImg:addEventListener("touch", cardTouchListener)
       combine(cardImg, cardScale)
       table.insert(self.cards, cardImg)

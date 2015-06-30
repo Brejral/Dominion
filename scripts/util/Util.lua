@@ -67,7 +67,6 @@ math.randomseed( os.time() )
 
 function shuffle( t, shuffleCount )
    local rand = math.random
-   assert( t, "shuffle() expected a table, got nil" )
    local iterations = #t
    local j
 
@@ -140,6 +139,7 @@ function eval(string)
 end
 
 function removeFromTable(tbl, obj)
+   if not obj then return nil end
    return table.remove(tbl, indexOf(tbl, obj))
 end
 

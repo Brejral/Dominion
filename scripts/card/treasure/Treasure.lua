@@ -13,7 +13,7 @@ function Treasure:__init(params)
    self.coins = params.coins or 0
 end
 
-function Treasure:getCoins()
+function Treasure:getCoins(player)
    return self.coins
 end
 

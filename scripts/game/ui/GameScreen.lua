@@ -107,6 +107,7 @@ function scene:setupForDefault()
 end
 
 function scene:showHandSelectionModal(params)
+   self:update()
    local options = {}
    combine(options, modalOptions)
    options.params = params
@@ -114,6 +115,7 @@ function scene:showHandSelectionModal(params)
 end
 
 function scene:showCardSelectionModal(params)
+   self:update()
    local options = {}
    combine(options, modalOptions)
    options.params = params
@@ -121,6 +123,7 @@ function scene:showCardSelectionModal(params)
 end
 
 function scene:showChoiceModal(params)
+   self:update()
    local options = {}
    combine(options, modalOptions)
    options.params = params

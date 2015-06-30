@@ -12,3 +12,8 @@ class.PhilosophersStone(Treasure)
 function PhilosophersStone:__init()
    self.Treasure:__init(params)    -- the new instance
 end
+
+function PhilosophersStone:getCoins(player)
+   local count = #player.deck + #player.discardPile
+   return math.floor(count / 5)
+end

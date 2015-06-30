@@ -15,5 +15,8 @@ end
 
 function Possession:playAction()
    self.Action.playAction(self)
+   local player = game:getCurrentPlayerForTurn()
+   local nextPlayer = game:getNextPlayer(player)
+   game:addExtraTurn({player = nextPlayer, isPossession = true, possessor = player})
    self:endAction()
 end

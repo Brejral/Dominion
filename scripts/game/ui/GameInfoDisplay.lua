@@ -154,7 +154,7 @@ function GameInfoDisplay:update()
          playerTable.coinsText:setFillColor(1, 1, 1)
          playerTable.pointsText:setFillColor(1, 1, 1)
       end
-      playerTable.playerText.text = player.name
+      playerTable.playerText.text = player.name .. (player:isPossessed() and "(Possessed)" or "")
       playerTable.actionsText.text = "Actions: " .. player:getActions()
       playerTable.buysText.text = "Buys: " .. player:getBuys()
       playerTable.coinsText.text = "Coins: " .. player:getCoins()

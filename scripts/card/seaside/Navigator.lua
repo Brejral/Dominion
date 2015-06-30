@@ -48,8 +48,7 @@ function Navigator.handleChoiceModal(params)
          target = params.target,
          cards = params.cards,
          afterSelection = params.target.handleCardSelectionModal,
-         isOrdering = true,
-         isNegative = true
+         isOrdering = true
       }
       gameScreen:showCardSelectionModal(modalParams)
    end

@@ -35,7 +35,7 @@ function PearlDiver.handleChoiceModal(params)
    if params.selection == "Move to Top" then
       player:addToDeck(params.cards[1])
    else
-      player:addToDeck(1, params.cards[1])
+      player:addToDeck(params.cards[1], 1)
    end
    params.target:endAction()
 end

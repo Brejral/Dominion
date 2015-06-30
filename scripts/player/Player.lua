@@ -14,6 +14,10 @@ function Player:__init(params)
    self.coins = 0
    self.coinTokens = 0
    self.potions = 0
+   self.possessions = 0
+   self.extraTurns = 0
+   self.possessor = nil
+   self.cardsDrawnOnCleanup = nil
    self:setStartingDeck()
    self.discardPile = {}
    self.hand = {}
@@ -24,6 +28,8 @@ function Player:__init(params)
    self.cardsGainedThisTurn = {}
    self.cardsBoughtThisTurn = {}
    self.discardFromPlayCards = {}
+   self.endOfTurnCards = {}
+   self.trashedCardsDuringPossession = {}
    self.isTurn = false
    self.isAction = false
    self.isAttackTurn = false
@@ -75,7 +81,9 @@ function Player:drawCards(numCards)
 end
 
 function Player:gainCard(card)
-   if card then
+   if self:isPossessed() then
+      self.possessor:gainCard(card)
+   elseif card then
       table.insert(self.cardsGainedThisTurn, card)
       table.insert(self.discardPile, card)
    end
@@ -83,6 +91,12 @@ end
 
 function Player:gainCardFromSupply(card)
    self:gainCard(game.cardSupply:getCard(card))
+end
+
+function Player:addCardsToHand(cards)
+   for k,card in pairs(cards) do
+      self:addCardToHand(card)
+   end
 end
 
 function Player:addCardToHand(card)
@@ -124,7 +138,8 @@ end
 
 function Player:drawNewHand()
    self:discardHand()
-   self:drawCards(game.outpostPlayed and not game.secondOutpostTurn and 3 or 5)
+   self:drawCards(self.cardsDrawnOnCleanup or 5)
+   self.cardsDrawnOnCleanup = nil
 end
 
 function Player:addActions(actions)
@@ -158,7 +173,12 @@ function Player:trashCard(card)
       elseif contains(self.discardPile, card) then
          table.remove(self.discardPile, indexOf(self.discardPile, card))
       end
-      table.insert(game.trash, card)
+      if not self:isPossessed() then
+         table.insert(game.trash, card)
+      else
+         table.insert(self.setAsideCards, card)
+         table.insert(self.trashedCardsDuringPossession, card)
+      end
    end
 end
 
@@ -170,7 +190,11 @@ end
 
 function Player:startTurn()
    self.isTurn = true
-   self.stats.turns = self.stats.turns + 1
+   if game.isExtraTurn then
+      self.stats.extraTurns = self.stats.extraTurns + 1
+   else
+      self.stats.turns = self.stats.turns + 1
+   end
    self.actions = 1
    self.buys = 1
    self.cardsGainedThisTurn = {}
@@ -192,10 +216,15 @@ end
 
 function Player:endTurn()
    self:cleanupPhase()
+   self.possessor = nil
    self.isTurn = false
 end
 
 function Player:cleanupPhase()
+   while #self.trashedCardsDuringPossession > 0 do
+      local card = table.remove(self.trashedCardsDuringPossession)
+      table.insert(self.discardPile, removeFromTable(self.setAsideCards, card))
+   end
    while #self.durations > 0 do
       table.insert(self.discardPile, table.remove(self.durations))
    end
@@ -208,7 +237,7 @@ function Player:cleanupPhase()
    self.stats.unspentCoins = self.stats.unspentCoins + self.coins
    for k,card in pairs(self.hand) do
       if card:is_a(Treasure) then
-         self.stats.unspentCoins = self.stats.unspentCoins + card:getCoins()
+         self.stats.unspentCoins = self.stats.unspentCoins + card:getCoins(self)
       end
    end
    if actionsPlayed > self.stats.mostActionsInTurn then
@@ -242,7 +271,7 @@ end
 function Player:playCard(card)
    table.insert(self.playedCards, table.remove(self.hand, indexOf(self.hand, card)))
    if card:is_a(Treasure) then
-      local coins = card:getCoins() + (card:is_a(Copper) and game.copperBonus or 0)
+      local coins = card:getCoins(self) + (card:is_a(Copper) and game.copperBonus or 0)
       self.coins = self.coins + coins
       if card:is_a(Potion) then
          self.potions = self.potions + 1
@@ -360,6 +389,7 @@ end
 function Player:setupStats()
    self.stats = {}
    self.stats.turns = 0
+   self.stats.extraTurns = 0
    self.stats.treasuresPlayed = 0
    self.stats.actionsPlayed = 0
    self.stats.attacksPlayed = 0
@@ -384,7 +414,7 @@ function Player:setEndGameStats()
    for k,card in pairs(self.deck) do
       if card:is_a(Treasure) then
          self.stats.treasureCards = self.stats.treasureCards + 1
-         self.stats.totalTreasureCoins = self.stats.totalTreasureCoins + card:getCoins()
+         self.stats.totalTreasureCoins = self.stats.totalTreasureCoins + card:getCoins(self)
       elseif card:is_a(Attack) then
          self.stats.attackCards = self.stats.attackCards + 1
          self.stats.actionCards = self.stats.actionCards + 1
@@ -466,4 +496,33 @@ function Player:addToDeck(card, index)
          table.insert(self.deck, card)
       end
    end
+end
+
+function Player:removeFromDeck(index)
+   self:checkForDeckResupply()
+   if not index then
+      return table.remove(self.deck)
+   else
+      return table.remove(self.deck, index)
+   end
+end
+
+function Player:removeFromHand(card)
+   return removeFromTable(self.hand, card)
+end
+
+function Player:addCardToSetAsideCards(card)
+   table.insert(self.setAsideCards, card)
+end
+
+function Player:removeFromSetAsideCards(card)
+   return removeFromTable(self.setAsideCards, card)
+end
+
+function Player:isPossessed()
+   return self.possessor
+end
+
+function Player:setPossessor(possessor)
+   self.possessor = possessor
 end

@@ -1,20 +1,22 @@
 -- Vineyard class
-require "scripts.card.action.Action"
+require "scripts.card.victory.Victory"
 
 local params = {
    image = "images/Alchemy/Vineyard.png",
-   cost = 3,
-   actions = 2,
-   cards = 1
+   cost = 0,
+   costsPotion = true
 }
 
-class.Vineyard(Action)
+class.Vineyard(Victory)
 
 function Vineyard:__init()
-   self.Action:__init(params)    -- the new instance
+   self.Victory:__init(params)    -- the new instance
 end
 
-function Vineyard:playAction()
-   self.Action.playAction(self)
-   self:endAction()
+function Vineyard:getPoints(player)
+   local actions = 0
+   for k,card in pairs(player:getAllCards()) do
+      if card:is_a(Action) then actions = actions + 1 end
+   end
+   return math.floor(actions / 3)
 end
